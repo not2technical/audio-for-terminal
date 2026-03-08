@@ -93,6 +93,7 @@ All standard voice commands work in streaming mode:
 ### Text Submission:
 ```
 "send it"                  → Submit the current input (press Enter)
+"submit"                   → Submit the current input (press Enter)
 ```
 
 ### Editing:

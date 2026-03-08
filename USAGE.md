@@ -79,6 +79,7 @@ Terminal: echo hello world█
 ### 📤 Text Submission
 ```
 "send it"             → Submit the current input (press Enter)
+"submit"              → Submit the current input (press Enter)
 ```
 
 ### ⬅️➡️ Cursor Navigation
@@ -98,15 +99,6 @@ Terminal: echo hello world█
 "delete"              → Delete 1 character
 "delete 3"            → Delete 3 characters
 "backspace"           → Delete 1 character
-```
-
-### ⌨️ Special Keys
-```
-"press enter"         → Press Enter
-"new line"            → Press Enter
-"press tab"           → Auto-complete
-"escape"              → Cancel
-"cancel"              → Press Escape
 ```
 
 ## Real-World Examples

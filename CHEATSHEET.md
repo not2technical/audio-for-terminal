@@ -29,6 +29,7 @@ tail -f /tmp/voice-dictation-streaming.log
 | Say This | Action |
 |----------|--------|
 | "send it" | Submit the current input (press Enter) |
+| "submit" | Submit the current input (press Enter) |
 
 ### 📝 Text Input
 | Say This | Result |
@@ -55,15 +56,6 @@ tail -f /tmp/voice-dictation-streaming.log
 | "delete" | Delete 1 character |
 | "delete 3" | Delete 3 characters |
 | "backspace" | Delete 1 character |
-
-### ⌨️ Special Keys
-| Say This | Action |
-|----------|--------|
-| "press enter" | Press Enter |
-| "new line" | Press Enter |
-| "press tab" | Press Tab |
-| "escape" | Press Escape |
-| "cancel" | Press Escape |
 
 ## Common Workflows
 

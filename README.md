@@ -206,6 +206,7 @@ You: "echo hello world"
 | Command | Action |
 |---------|--------|
 | `send it` | Submit the current input (press Enter) |
+| `submit` | Submit the current input (press Enter) |
 
 ### Navigation Commands
 
@@ -225,16 +226,6 @@ You: "echo hello world"
 | `delete line` | Delete entire line |
 | `delete [N]` | Delete N characters (default: 1) |
 | `backspace [N]` | Delete N characters |
-
-### Special Keys
-
-| Command | Action |
-|---------|--------|
-| `press enter` | Press Enter key |
-| `new line` | Press Enter key |
-| `press tab` | Press Tab key |
-| `escape` | Press Escape key |
-| `cancel` | Press Escape key |
 
 See [CHEATSHEET.md](CHEATSHEET.md) for the complete command reference.
 
