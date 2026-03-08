@@ -2,24 +2,40 @@
 
 ## Start the App
 ```bash
-cd voice-terminal && ./run.sh
+cd audio-for-terminal && ./toggle.sh
+```
+
+## Monitor Service Logs
+```bash
+tail -f /tmp/voice-dictation-streaming.log
 ```
 
 ## How to Use
 1. Say **"computer"** (wake word)
-2. Blue circle appears = listening
-3. Speak your command
-4. Pause 1.5 seconds when done
-5. Text types automatically!
+2. Speak your command
+3. Pause briefly when done
+4. Text types automatically!
 
 ## Voice Commands Cheat Sheet
+
+### 🎯 Claude Mode Toggle
+| Say This | Action |
+|----------|--------|
+| "change mode" | Cycle through Claude's plan/edit/default modes |
+| "change mode twice" | Cycle through modes twice |
+| "change mode three times" | Cycle three times |
+
+### 📤 Text Submission
+| Say This | Action |
+|----------|--------|
+| "send it" | Submit the current input (press Enter) |
 
 ### 📝 Text Input
 | Say This | Result |
 |----------|--------|
-| "ls dash la" | `ls -la` |
 | "echo hello world" | `echo hello world` |
-| "git commit dash m quote test quote" | `git commit -m "test"` |
+| "git status" | `git status` |
+| Just speak naturally | Text types as you speak |
 
 ### ⬅️➡️ Navigation
 | Say This | Action |
@@ -45,49 +61,25 @@ cd voice-terminal && ./run.sh
 |----------|--------|
 | "press enter" | Press Enter |
 | "new line" | Press Enter |
-| "submit" | Press Enter |
 | "press tab" | Press Tab |
 | "escape" | Press Escape |
 | "cancel" | Press Escape |
 
-## Pronunciation Guide
-| Symbol | Say |
-|--------|-----|
-| `-` | "dash" |
-| `.` | "dot" |
-| `/` | "slash" |
-| `"` | "quote" |
-| `_` | "underscore" |
-| `@` | "at" |
-| `#` | "hash" or "pound" |
-
 ## Common Workflows
 
-### Create Directory
+### Simple Text Entry
 ```
 "computer"
-"mkdir my dash project"
-"press enter"
-```
-
-### Git Commit
-```
+"echo hello world"
 "computer"
-"git add dot"
-"press enter"
-"computer"
-"git commit dash m quote initial commit quote"
-"press enter"
+"send it"
 ```
 
-### Navigate Files
+### Change Claude Mode
 ```
 "computer"
-"cd projects slash voice dash terminal"
-"press enter"
-"computer"
-"ls dash la"
-"press enter"
+"change mode"
+[Mode cycles to next]
 ```
 
 ### Fix Typo
@@ -100,29 +92,46 @@ cd voice-terminal && ./run.sh
 "computer"
 "delete"
 "computer"
-"hello"
+"ll"
+```
+
+### Use Editing Commands
+```
+"computer"
+"this is some text"
+[text appears]
+"computer"
+"delete word"
+[last word removed]
+"computer"
+"new text here"
 ```
 
 ## Launch Options
 
-### Default (Recommended)
+### Background Service (Recommended)
 ```bash
-./run.sh
+./toggle.sh
+```
+
+### Foreground Mode (Testing)
+```bash
+./run-streaming.sh
 ```
 
 ### Fast Mode (Less Accurate)
 ```bash
-./run.sh tiny
+python main_streaming.py --model tiny
 ```
 
 ### Accurate Mode (Slower)
 ```bash
-./run.sh small
+python main_streaming.py --model small
 ```
 
 ### Custom Wake Word
 ```bash
-./run.sh base jarvis
+python main_streaming.py --wake-word jarvis
 ```
 
 Available wake words: **computer**, **jarvis**, **alexa**, **hey google**, **ok google**, **porcupine**, **bumblebee**, **terminator**
@@ -131,11 +140,12 @@ Available wake words: **computer**, **jarvis**, **alexa**, **hey google**, **ok 
 
 | Problem | Solution |
 |---------|----------|
-| Wake word not detected | Speak louder, increase sensitivity: `python main.py --sensitivity 0.7` |
-| Slow transcription | Use tiny model: `./run.sh tiny` |
-| Wrong text | Speak slower, use better model: `./run.sh small` |
+| Wake word not detected | Speak louder, increase sensitivity: `python main_streaming.py --sensitivity 0.7` |
+| Slow transcription | Use tiny model: `python main_streaming.py --model tiny` |
+| Wrong text | Speak slower, use better model: `python main_streaming.py --model small` |
 | No microphone | Grant permissions in System Settings |
 | Text not appearing | Make sure terminal has focus |
+| Service not running | Check: `./status.sh`, view logs: `tail -f /tmp/voice-dictation-streaming.log` |
 
 ## Test Components
 
@@ -149,6 +159,13 @@ python input_injector.py     # Test typing
 ```
 
 ## Stop the App
+
+### Background Service
+```bash
+./toggle.sh  # Toggles off
+```
+
+### Foreground Mode
 Press `Ctrl+C`
 
 ---

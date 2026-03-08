@@ -2,39 +2,62 @@
 
 ## Running the App
 
-### Option 1: Quick Start (Recommended)
+### Option 1: Background Service (Recommended)
 ```bash
-cd voice-terminal
-./run.sh
+cd audio-for-terminal
+./toggle.sh     # Start or stop the service
 ```
 
-### Option 2: With Custom Model
+This runs voice dictation as a background service. Run again to toggle off.
+
+### Option 2: Foreground (for testing/debugging)
 ```bash
-./run.sh tiny          # Fastest
-./run.sh base          # Balanced (default)
-./run.sh small         # More accurate
+./run-streaming.sh     # Run in foreground, see live output
 ```
 
-### Option 3: With Custom Wake Word
+Press Ctrl+C to stop.
+
+### Monitoring Background Service
+
+When running via `./toggle.sh`, monitor the log file in real-time:
 ```bash
-./run.sh base jarvis   # Model + wake word
+tail -f /tmp/voice-dictation-streaming.log
 ```
 
-### Option 4: Manual (Full Control)
+The log shows:
+- Wake word detections ("computer" detected)
+- Transcription results
+- Command executions ("change mode", "send it", etc.)
+- Errors and debugging info
+
+Press Ctrl+C to stop watching (service continues running).
+
+### Option 3: Direct Python Execution
 ```bash
 source venv/bin/activate
-python main.py --wake-word computer --model base --sensitivity 0.5
+python main_streaming.py
+```
+
+### Custom Configuration
+```bash
+# Use a different wake word
+python main_streaming.py --wake-word jarvis
+
+# Use a different model
+python main_streaming.py --model small
+
+# Adjust sensitivity
+python main_streaming.py --sensitivity 0.7
 ```
 
 ## How It Works
 
-1. **Start the app** - Run `./run.sh`
-2. **Wait for prompt** - You'll see "🎧 Say 'computer' to start dictation"
+1. **Start the app** - Run `./toggle.sh`
+2. **Wait for prompt** - You'll see "🎧 Say 'computer' to start dictation" in the log
 3. **Say wake word** - Say "computer" clearly
-4. **See overlay** - A blue pulsing circle appears (bottom-right)
-5. **Speak** - Say your command or text
-6. **Pause** - Wait 1.5 seconds when done
-7. **Watch it type** - Your text appears in the terminal!
+4. **Speak** - Say your command or text
+5. **Pause** - Wait briefly when done
+6. **Watch it type** - Your text appears in the terminal!
 
 ## Voice Commands
 
@@ -44,6 +67,18 @@ Just speak normally:
 You:      "computer"
 You:      "echo hello world"
 Terminal: echo hello world█
+```
+
+### 🎯 Claude Mode Toggle
+```
+"change mode"         → Cycle through Claude's plan/edit/default modes
+"change mode twice"   → Cycle through modes twice
+"change mode three times" → Cycle three times
+```
+
+### 📤 Text Submission
+```
+"send it"             → Submit the current input (press Enter)
 ```
 
 ### ⬅️➡️ Cursor Navigation
@@ -67,9 +102,8 @@ Terminal: echo hello world█
 
 ### ⌨️ Special Keys
 ```
-"press enter"         → Submit command
+"press enter"         → Press Enter
 "new line"            → Press Enter
-"submit"              → Press Enter
 "press tab"           → Auto-complete
 "escape"              → Cancel
 "cancel"              → Press Escape
@@ -77,83 +111,83 @@ Terminal: echo hello world█
 
 ## Real-World Examples
 
-### Example 1: Creating a Directory
+### Example 1: Simple Text Entry
 ```
 Terminal: $
 
 You:      "computer"
-You:      "mkdir my dash project"
-Terminal: $ mkdir my-project█
+You:      "echo hello world"
+Terminal: $ echo hello world█
 
 You:      "computer"
-You:      "press enter"
-Terminal: $ mkdir my-project
+You:      "send it"
+Terminal: $ echo hello world
+          hello world
           $█
 ```
 
-### Example 2: Listing Files
+### Example 2: Editing Text
 ```
 You:      "computer"
-You:      "ls dash la"
-Terminal: $ ls -la█
-```
-
-### Example 3: Editing Command
-```
-You:      "computer"
-You:      "git commit dash m quote test quote"
-Terminal: $ git commit -m "test"█
-
-You:      "computer"
-You:      "move left 6"
-Terminal: $ git commit -m█"test"
+You:      "git status"
+Terminal: $ git status█
 
 You:      "computer"
 You:      "delete word"
-Terminal: $ git commit -█"test"
+Terminal: $ git █
 
 You:      "computer"
-You:      "push"
-Terminal: $ git commit -push"test"█
+You:      "add all"
+Terminal: $ git add all█
+```
+
+### Example 3: Using Change Mode
+```
+You:      "computer"
+You:      "change mode"
+Terminal: [Cycles through Claude's modes]
 
 You:      "computer"
-You:      "move to end"
-Terminal: $ git commit -push"test"█
+You:      "help me write a script"
+Terminal: $ help me write a script█
+
+You:      "computer"
+You:      "send it"
+Terminal: [Command submitted to Claude]
 ```
 
 ## Tips & Tricks
 
 ### 🎯 Better Recognition
 - Speak clearly at normal volume
-- Say "dash" for "-"
-- Say "dot" for "."
-- Say "slash" for "/"
-- Say "quote" for quotation marks
-- Pause briefly between words
+- Speak naturally - just say the text you want typed
+- Pause briefly between commands
+- Use "change mode" to switch Claude modes
+- Use "send it" to submit input
 
 ### 🏃 Faster Transcription
 ```bash
-./run.sh tiny    # Use tiny model for speed
+python main_streaming.py --model tiny    # Use tiny model for speed
 ```
 
 ### 🎯 Better Accuracy
 ```bash
-./run.sh small   # Use small model for accuracy
+python main_streaming.py --model small   # Use small model for accuracy
 ```
 
 ### 🔊 More Sensitive Wake Word
 ```bash
-python main.py --sensitivity 0.7
+python main_streaming.py --sensitivity 0.7
 ```
 
 ### 🔇 Less Sensitive Wake Word
 ```bash
-python main.py --sensitivity 0.3
+python main_streaming.py --sensitivity 0.3
 ```
 
 ### 🎭 Different Wake Word
 ```bash
-python main.py --wake-word jarvis
+python main_streaming.py --wake-word jarvis
 ```
 
 Available: computer, jarvis, alexa, hey google, ok google, porcupine, bumblebee, terminator
@@ -164,12 +198,15 @@ Before running the full app, test individual components:
 
 ### Test Microphone
 ```bash
+cd audio-for-terminal
 source venv/bin/activate
 python test_mic.py
 ```
+Speaks a test sound and shows audio levels. Press Ctrl+C to stop.
 
 ### Test Wake Word Detection
 ```bash
+cd audio-for-terminal
 source venv/bin/activate
 python wake_word_detector.py
 # Say "computer" to test
@@ -178,6 +215,7 @@ python wake_word_detector.py
 
 ### Test Audio Recording
 ```bash
+cd audio-for-terminal
 source venv/bin/activate
 python audio_recorder.py
 # Speak after the prompt
@@ -186,6 +224,7 @@ python audio_recorder.py
 
 ### Test Transcription
 ```bash
+cd audio-for-terminal
 source venv/bin/activate
 python audio_recorder.py
 python transcriber.py /tmp/test_recording.wav
@@ -193,6 +232,7 @@ python transcriber.py /tmp/test_recording.wav
 
 ### Test Keyboard Input
 ```bash
+cd audio-for-terminal
 source venv/bin/activate
 python input_injector.py
 # Focus your terminal within 3 seconds
@@ -203,11 +243,11 @@ python input_injector.py
 
 ### Wake word not detected
 - Speak louder and clearer
-- Try: `python main.py --sensitivity 0.7`
+- Try: `python main_streaming.py --sensitivity 0.7`
 - Check microphone with: `python test_mic.py`
 
 ### Transcription is slow
-- Use faster model: `./run.sh tiny`
+- Use faster model: `python main_streaming.py --model tiny`
 - Close other applications
 - Check CPU usage
 
@@ -216,20 +256,21 @@ python input_injector.py
 - Try clicking in the terminal before speaking
 - Test with: `python input_injector.py`
 
-### Overlay not showing
-- Check if app is running
-- Try running: `python overlay_ui.py`
-- Ensure Python has accessibility permissions
-
 ### Wrong text transcribed
 - Speak more slowly and clearly
-- Use better model: `./run.sh small`
+- Use better model: `python main_streaming.py --model small`
 - Reduce background noise
 - Get closer to microphone
 
+### Service not running
+- Check status: `./status.sh`
+- Check logs: `tail -f /tmp/voice-dictation-streaming.log`
+- Restart: `./toggle.sh` (off), then `./toggle.sh` (on)
+
 ## Stopping the App
 
-Press `Ctrl+C` in the terminal running the app.
+- **Background service**: `./toggle.sh` (toggles off)
+- **Foreground mode**: Press `Ctrl+C` in the terminal running the app
 
 ## Getting Help
 

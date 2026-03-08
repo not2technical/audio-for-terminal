@@ -79,6 +79,34 @@ Text appears word-by-word as you speak! ✨
 
 ---
 
+## 🎤 Voice Commands
+
+All standard voice commands work in streaming mode:
+
+### Claude Mode Toggle:
+```
+"change mode"              → Cycle through Claude's plan/edit/default modes
+"change mode twice"        → Cycle through modes twice
+"change mode three times"  → Cycle three times
+```
+
+### Text Submission:
+```
+"send it"                  → Submit the current input (press Enter)
+```
+
+### Editing:
+```
+"delete word"              → Delete previous word
+"delete line"              → Clear entire line
+"move left [N]"            → Move cursor left
+"move right [N]"           → Move cursor right
+```
+
+See [CHEATSHEET.md](CHEATSHEET.md) for the complete command reference.
+
+---
+
 ## 📝 Commands
 
 ### Start Streaming Mode:

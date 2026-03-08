@@ -24,9 +24,9 @@ Type with your voice in any terminal application. Say "computer", speak your com
 
 - **Wake Word Detection** - Say "computer" to activate (customizable)
 - **Real-Time Streaming** - Instant transcription with faster-whisper
-- **Voice Commands** - Navigate and edit with voice ("delete word", "press enter", etc.)
-- **Visual Overlay** - Pulsing indicator shows listening state
-- **Batch & Streaming Modes** - Choose speed vs. accuracy
+- **Voice Commands** - Navigate and edit with voice ("delete word", "send it", etc.)
+- **Claude Mode Toggle** - Switch between plan/edit/default modes with voice
+- **Background Service** - Run as daemon with toggle script
 - **Configurable Models** - From tiny (fast) to large (accurate)
 
 ---
@@ -59,8 +59,8 @@ cd audio-for-terminal
 # 3. Configure your Picovoice API key (free)
 ./setup-access-key.sh
 
-# 4. Launch streaming mode (recommended)
-./run-streaming.sh
+# 4. Start the background service
+./toggle.sh
 ```
 
 Say **"computer"**, then speak your command!
@@ -141,26 +141,32 @@ pip install -r requirements.txt
 
 ## 🎮 Usage
 
-### Streaming Mode (Recommended)
+### Background Service (Recommended)
 
-Fast, real-time transcription:
+Start/stop as background service:
+```bash
+./toggle.sh
+```
+
+Run again to toggle off.
+
+### Foreground Mode
+
+Run in foreground for testing/debugging:
 ```bash
 ./run-streaming.sh
 ```
 
-### Batch Mode
+Press Ctrl+C to stop.
 
-More accurate, but slower:
+### Monitoring Background Service
+
+View logs in real-time:
 ```bash
-./run.sh
+tail -f /tmp/voice-dictation-streaming.log
 ```
 
-### With Visual Overlay
-
-Adds a pulsing visual indicator:
-```bash
-./run-with-overlay.sh
-```
+Shows wake word detections, transcriptions, command executions, and errors.
 
 ### Custom Configuration
 
@@ -187,6 +193,20 @@ You: "echo hello world"
 → Types: echo hello world
 ```
 
+### Claude Mode Toggle
+
+| Command | Action |
+|---------|--------|
+| `change mode` | Cycle through Claude's plan/edit/default modes |
+| `change mode twice` | Cycle through modes twice |
+| `change mode three times` | Cycle three times |
+
+### Text Submission
+
+| Command | Action |
+|---------|--------|
+| `send it` | Submit the current input (press Enter) |
+
 ### Navigation Commands
 
 | Command | Action |
@@ -212,7 +232,6 @@ You: "echo hello world"
 |---------|--------|
 | `press enter` | Press Enter key |
 | `new line` | Press Enter key |
-| `submit` | Press Enter key |
 | `press tab` | Press Tab key |
 | `escape` | Press Escape key |
 | `cancel` | Press Escape key |
@@ -265,8 +284,6 @@ See [CHEATSHEET.md](CHEATSHEET.md) for the complete command reference.
 │  Input Injector     │  (pynput)
 │  Simulate keyboard  │
 └─────────────────────┘
-
-        [Overlay UI runs in parallel thread]
 ```
 
 ---
@@ -280,15 +297,16 @@ audio-for-terminal/
 ├── streaming_transcriber.py   # faster-whisper transcription
 ├── wake_word_detector.py      # Porcupine wake word detection
 ├── input_injector.py          # Keyboard simulation
-├── overlay_ui.py              # Visual status indicator
+├── audio_recorder.py          # Audio recording with VAD
+├── transcriber.py             # Whisper transcription
+├── test_mic.py               # Microphone testing utility
 ├── setup.sh                   # Automated installation
-├── setup-access-key.sh        # API key setup script
-├── run-streaming.sh           # Launch streaming mode
-├── run.sh                     # Launch batch mode
-├── run-with-overlay.sh        # Launch with overlay
-├── requirements.txt           # Python dependencies
-├── .env.example               # Environment template
-└── README.md                  # This file
+├── setup-access-key.sh        # API key configuration
+├── run-streaming.sh           # Launch streaming mode (foreground)
+├── toggle.sh                  # Start/stop service (background)
+├── toggle-streaming.sh        # Streaming service toggle
+├── status.sh                  # Check service status
+└── requirements.txt           # Python dependencies
 ```
 
 ---
@@ -336,21 +354,15 @@ pip install pyaudio
 2. Use smaller model: `python main_streaming.py --model tiny`
 3. Close other applications to free up CPU/RAM
 
-### Issue: Overlay doesn't appear
+### Testing Microphone
 
 **Solution:**
-1. Check tkinter: `python -c "import tkinter"`
-2. Test overlay: `python overlay_ui.py`
-
----
-
-## 🎨 Overlay States
-
-The floating overlay shows the current state:
-
-- 💤 **Idle (Gray)** - Waiting for wake word
-- 🎤 **Listening (Blue, Pulsing)** - Recording your voice
-- ⚙️ **Processing (Purple)** - Transcribing audio
+```bash
+cd audio-for-terminal
+source venv/bin/activate
+python test_mic.py
+```
+Speaks a test sound and shows audio levels. Press Ctrl+C to stop.
 
 ---
 
@@ -409,19 +421,6 @@ Free to use for personal and commercial projects.
 - **[PyAudio](https://people.csail.mit.edu/hubert/pyaudio/)** - Audio capture
 - **[pynput](https://github.com/moses-palmer/pynput)** - Keyboard simulation
 - **[WebRTC VAD](https://github.com/wiseman/py-webrtcvad)** - Voice activity detection
-
----
-
-## 📊 Roadmap
-
-- [ ] Multi-language support (Spanish, French, etc.)
-- [ ] Custom wake word training
-- [ ] Integration with shell history
-- [ ] Command disambiguation ("did you mean...")
-- [ ] Continuous listening mode
-- [ ] macOS menu bar integration
-- [ ] Linux support
-- [ ] Windows support
 
 ---
 

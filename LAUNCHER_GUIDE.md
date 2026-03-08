@@ -15,7 +15,7 @@ Multiple ways to start/stop Voice Dictation without typing in terminal!
 - First run = **Starts** voice dictation in background
 - Second run = **Stops** voice dictation
 - Runs silently in background
-- Check logs: `/tmp/voice-dictation.log`
+- Check logs: `/tmp/voice-dictation-streaming.log`
 
 **Check if running:**
 ```bash
@@ -52,7 +52,7 @@ This creates `VoiceDictation.app` in `~/Applications/`
 3. Add action: **Run Shell Script**
 4. Paste this script:
    ```bash
-   cd /Users/akrys/voice-terminal && ./toggle.sh
+   cd /Users/akrys/audio-for-terminal && ./toggle.sh
    ```
 5. Name it: "Toggle Voice Dictation"
 6. Right-click → **Add Keyboard Shortcut**
@@ -67,7 +67,7 @@ Now press `⌘⌥⇧V` to start/stop voice dictation!
 3. Add: **Run Shell Script**
 4. Paste:
    ```bash
-   cd /Users/akrys/voice-terminal && ./toggle.sh
+   cd /Users/akrys/audio-for-terminal && ./toggle.sh
    ```
 5. Save as: "Toggle Voice Dictation"
 6. Go to: **System Settings → Keyboard → Keyboard Shortcuts**
@@ -81,7 +81,7 @@ Now press `⌘⌥⇧V` to start/stop voice dictation!
 ### Alfred Workflow
 ```bash
 # Create Alfred workflow that runs:
-cd /Users/akrys/voice-terminal && ./toggle.sh
+cd /Users/akrys/audio-for-terminal && ./toggle.sh
 ```
 
 **Trigger:** `voice` or `vd`
@@ -95,7 +95,7 @@ cd /Users/akrys/voice-terminal && ./toggle.sh
 # @raycast.title Toggle Voice Dictation
 # @raycast.mode compact
 
-cd /Users/akrys/voice-terminal && ./toggle.sh
+cd /Users/akrys/audio-for-terminal && ./toggle.sh
 ```
 
 Save as: `toggle-voice-dictation.sh` in Raycast script commands folder
@@ -117,23 +117,23 @@ Want a menu bar icon to start/stop? Here's how:
 # <swiftbar.version>v1.0</swiftbar.version>
 # <swiftbar.author>You</swiftbar.author>
 
-PID_FILE="/Users/akrys/voice-terminal/.voice-dictation.pid"
+PID_FILE="/Users/akrys/audio-for-terminal/.voice-dictation-streaming.pid"
 
 if [ -f "$PID_FILE" ] && ps -p "$(cat $PID_FILE)" > /dev/null 2>&1; then
     echo "🎤"
     echo "---"
     echo "Voice Dictation: Running ✅"
-    echo "Stop | bash=/Users/akrys/voice-terminal/toggle.sh terminal=false refresh=true"
+    echo "Stop | bash=/Users/akrys/audio-for-terminal/toggle.sh terminal=false refresh=true"
 else
     echo "🎤"
     echo "---"
     echo "Voice Dictation: Stopped ❌"
-    echo "Start | bash=/Users/akrys/voice-terminal/toggle.sh terminal=false refresh=true"
+    echo "Start | bash=/Users/akrys/audio-for-terminal/toggle.sh terminal=false refresh=true"
 fi
 
 echo "---"
-echo "Status | bash=/Users/akrys/voice-terminal/status.sh terminal=true"
-echo "Open Logs | bash='tail -f /tmp/voice-dictation.log' terminal=true"
+echo "Status | bash=/Users/akrys/audio-for-terminal/status.sh terminal=true"
+echo "Open Logs | bash='tail -f /tmp/voice-dictation-streaming.log' terminal=true"
 ```
 
 3. Save to SwiftBar plugins folder
@@ -177,7 +177,7 @@ kill <PID>    # Replace <PID> with the number shown
 
 ### Method 4: Kill All Instances
 ```bash
-pkill -f "python main.py"
+pkill -f "python main_streaming.py"
 ```
 
 ### Method 5: Close Terminal Window
@@ -241,7 +241,7 @@ open ~/Applications/
 
 **Want to see logs when running in background:**
 ```bash
-tail -f /tmp/voice-dictation.log
+tail -f /tmp/voice-dictation-streaming.log
 ```
 
 **Check if it's actually running:**
