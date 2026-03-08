@@ -41,8 +41,6 @@ Type with your voice in any terminal application. Say "computer", speak your com
 | **Streaming STT** | faster-whisper (real-time transcription) |
 | **VAD** | WebRTC Voice Activity Detection |
 | **Keyboard Simulation** | pynput |
-| **GUI** | tkinter |
-| **ML Framework** | PyTorch |
 
 ---
 
