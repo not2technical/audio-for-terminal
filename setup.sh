@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "=================================================="
-echo "🎤 Voice Dictation for Terminal - Setup"
+echo "🎤 VoxTerm - Setup"
 echo "=================================================="
 echo ""
 

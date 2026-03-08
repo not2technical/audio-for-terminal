@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Create a macOS Application Bundle for Voice Dictation
+# Create a macOS Application Bundle for VoxTerm
 
-APP_NAME="VoiceDictation"
+APP_NAME="VoxTerm"
 APP_DIR="$HOME/Applications/$APP_NAME.app"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -20,11 +20,11 @@ cat > "$APP_DIR/Contents/Info.plist" << 'PLIST'
 <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key>
-    <string>VoiceDictation</string>
+    <string>VoxTerm</string>
     <key>CFBundleIdentifier</key>
-    <string>com.voicedictation.app</string>
+    <string>com.voxterm.app</string>
     <key>CFBundleName</key>
-    <string>VoiceDictation</string>
+    <string>VoxTerm</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
     <key>CFBundleShortVersionString</key>
@@ -34,16 +34,16 @@ cat > "$APP_DIR/Contents/Info.plist" << 'PLIST'
     <key>LSMinimumSystemVersion</key>
     <string>10.13</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Voice Dictation needs microphone access to listen for wake words and transcribe speech.</string>
+    <string>VoxTerm needs microphone access to listen for wake words and transcribe speech.</string>
 </dict>
 </plist>
 PLIST
 
 # Create launcher script
-cat > "$APP_DIR/Contents/MacOS/VoiceDictation" << LAUNCHER
+cat > "$APP_DIR/Contents/MacOS/VoxTerm" << LAUNCHER
 #!/bin/bash
 
-# Voice Dictation Launcher
+# VoxTerm Launcher
 
 VOICE_DIR="$SCRIPT_DIR"
 
@@ -57,7 +57,7 @@ EOF
 LAUNCHER
 
 # Make launcher executable
-chmod +x "$APP_DIR/Contents/MacOS/VoiceDictation"
+chmod +x "$APP_DIR/Contents/MacOS/VoxTerm"
 
 # Create icon (optional - using emoji as text)
 cat > "$APP_DIR/Contents/Resources/icon.txt" << 'ICON'
@@ -72,9 +72,9 @@ echo ""
 echo "🚀 To use:"
 echo "   1. Open Finder"
 echo "   2. Go to ~/Applications/"
-echo "   3. Double-click VoiceDictation.app"
+echo "   3. Double-click VoxTerm.app"
 echo ""
-echo "💡 Tip: Drag VoiceDictation.app to your Dock for quick access!"
+echo "💡 Tip: Drag VoxTerm.app to your Dock for quick access!"
 echo ""
 echo "🛑 To stop: Press Ctrl+C in the Terminal window"
 echo ""

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Voice Dictation Quick Launcher
-# Double-click this to start voice dictation
+# VoxTerm Quick Launcher
+# Double-click this to start VoxTerm
 
 # Get the directory where this script is located
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

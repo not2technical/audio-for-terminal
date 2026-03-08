@@ -1,6 +1,6 @@
-# 🚀 Quick Launch Guide
+# 🚀 VoxTerm Quick Launch Guide
 
-Multiple ways to start/stop Voice Dictation without typing in terminal!
+Multiple ways to start/stop VoxTerm without typing in terminal!
 
 ---
 

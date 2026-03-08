@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Toggle Voice Dictation STREAMING mode
+# Toggle VoxTerm STREAMING mode
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PID_FILE="$SCRIPT_DIR/.voice-dictation-streaming.pid"
@@ -10,10 +10,10 @@ if [ -f "$PID_FILE" ]; then
     PID=$(cat "$PID_FILE")
     if ps -p "$PID" > /dev/null 2>&1; then
         # Already running - stop it
-        echo "🛑 Stopping Voice Dictation Streaming (PID: $PID)..."
+        echo "🛑 Stopping VoxTerm Streaming (PID: $PID)..."
         kill "$PID" 2>/dev/null
         rm -f "$PID_FILE"
-        echo "✅ Voice Dictation Streaming stopped"
+        echo "✅ VoxTerm Streaming stopped"
         exit 0
     else
         # PID file exists but process is not running
@@ -22,7 +22,7 @@ if [ -f "$PID_FILE" ]; then
 fi
 
 # Not running - start it
-echo "🚀 Starting Voice Dictation STREAMING mode..."
+echo "🚀 Starting VoxTerm STREAMING mode..."
 
 # Check if access key is set, if not try to load from ~/.zshrc
 if [ -z "$PICOVOICE_ACCESS_KEY" ]; then
@@ -49,7 +49,7 @@ PICOVOICE_ACCESS_KEY="$PICOVOICE_ACCESS_KEY" python -u main_streaming.py > /tmp/
 PID=$!
 echo $PID > "$PID_FILE"
 
-echo "✅ Voice Dictation Streaming started (PID: $PID)"
+echo "✅ VoxTerm Streaming started (PID: $PID)"
 echo "📝 Log file: /tmp/voice-dictation-streaming.log"
 echo ""
 echo "🎤 Say 'computer' to activate"

@@ -1,12 +1,12 @@
 # 🚀 Quick Start Guide
 
-Get up and running with Voice Dictation in 5 minutes!
+Get up and running with VoxTerm in 5 minutes!
 
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/not2technical/audio-for-terminal.git
-cd audio-for-terminal
+git clone https://github.com/not2technical/voxterm.git
+cd voxterm
 ```
 
 ## 2. Install Dependencies

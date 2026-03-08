@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Voice Dictation for Terminal - STREAMING VERSION
-Real-time transcription that types as you speak
+VoxTerm - STREAMING VERSION
+Talk to your terminal. It's listening.
+Real-time voice control for developers.
 """
 import re
 import threading
@@ -34,7 +35,7 @@ class VoiceDictationStreaming:
             access_key: Picovoice access key
         """
         print("\n" + "="*60)
-        print("🎤 Voice Dictation for Terminal - STREAMING MODE")
+        print("🎤 VoxTerm - STREAMING MODE")
         print("="*60 + "\n")
 
         self.wake_word = wake_word
@@ -267,7 +268,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Voice Dictation for Terminal - STREAMING MODE",
+        description="VoxTerm - STREAMING MODE",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Streaming Mode: Text appears AS YOU SPEAK - much faster!

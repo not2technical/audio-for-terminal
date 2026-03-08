@@ -4,7 +4,7 @@
 
 ### Option 1: Background Service (Recommended)
 ```bash
-cd audio-for-terminal
+cd voxterm
 ./toggle.sh     # Start or stop the service
 ```
 
@@ -190,7 +190,7 @@ Before running the full app, test individual components:
 
 ### Test Microphone
 ```bash
-cd audio-for-terminal
+cd voxterm
 source venv/bin/activate
 python test_mic.py
 ```
@@ -198,7 +198,7 @@ Speaks a test sound and shows audio levels. Press Ctrl+C to stop.
 
 ### Test Wake Word Detection
 ```bash
-cd audio-for-terminal
+cd voxterm
 source venv/bin/activate
 python wake_word_detector.py
 # Say "computer" to test
@@ -207,7 +207,7 @@ python wake_word_detector.py
 
 ### Test Audio Recording
 ```bash
-cd audio-for-terminal
+cd voxterm
 source venv/bin/activate
 python audio_recorder.py
 # Speak after the prompt
@@ -216,7 +216,7 @@ python audio_recorder.py
 
 ### Test Transcription
 ```bash
-cd audio-for-terminal
+cd voxterm
 source venv/bin/activate
 python audio_recorder.py
 python transcriber.py /tmp/test_recording.wav
@@ -224,7 +224,7 @@ python transcriber.py /tmp/test_recording.wav
 
 ### Test Keyboard Input
 ```bash
-cd audio-for-terminal
+cd voxterm
 source venv/bin/activate
 python input_injector.py
 # Focus your terminal within 3 seconds

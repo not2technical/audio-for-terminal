@@ -1,8 +1,8 @@
-# 🎤 Voice Dictation - Quick Reference
+# 🎤 VoxTerm - Quick Reference
 
 ## Start the App
 ```bash
-cd audio-for-terminal && ./toggle.sh
+cd voxterm && ./toggle.sh
 ```
 
 ## Monitor Service Logs

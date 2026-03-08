@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Voice Dictation Toggle Script - Now uses STREAMING mode by default
+# VoxTerm Toggle Script - Now uses STREAMING mode by default
 # (Regular mode has been deprecated - streaming is faster and better)
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

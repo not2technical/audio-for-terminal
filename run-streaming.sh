@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run Voice Dictation in STREAMING mode (types as you speak!)
+# Run VoxTerm in STREAMING mode (types as you speak!)
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 

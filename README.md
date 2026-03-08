@@ -1,8 +1,9 @@
-# 🎤 Audio for Terminal
+# 🎤 VoxTerm
 
-**Privacy-focused voice dictation for terminal input with wake word activation and local speech-to-text.**
+**Talk to your terminal. It's listening.**
 
-Type with your voice in any terminal application. Say "computer", speak your command, and watch it appear in your terminal. All processing happens locally on your machine - no cloud APIs, no privacy concerns.
+Say "computer", speak your commands, and watch them appear—like you're in Star Trek.
+All processing happens locally on your Mac. No cloud, no surveillance, just you and your machine.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
@@ -10,24 +11,87 @@ Type with your voice in any terminal application. Say "computer", speak your com
 
 ---
 
-## 🎯 Why This Project?
+## 💡 Why VoxTerm?
 
-- **🙌 Hands-Free Terminal Input** - Type long commands without touching the keyboard
-- **🔒 Privacy First** - All speech recognition runs locally via OpenAI Whisper
-- **⚡ Fast & Efficient** - Wake word activation means no wasted processing
-- **♿ Accessibility** - Alternative input method for those who need it
-- **🎪 Just Cool** - Because talking to your computer is the future
+### macOS Has Voice Control. Why Do I Need This?
+
+**Great question.** macOS Voice Control is fantastic for accessibility and general UI control. But if you live in the terminal, it's not built for you.
+
+**VoxTerm is different:**
+
+| What You Get | Why It Matters |
+|--------------|----------------|
+| **🎯 Always Listening** | Just say "computer"—no manual key press every time |
+| **⚡ Terminal-Native Commands** | "delete word", "move left 5", "send it"—built for CLI workflows |
+| **🤖 AI Integration** | Claude mode switching with voice—no other tool does this |
+| **🔓 Open Source** | MIT licensed. Know exactly what's listening and where your audio goes |
+| **🎨 Fully Customizable** | 13+ wake words, tunable sensitivity, model choice—make it yours |
+| **🚀 Developer-First** | Built by devs for devs, not adapted from accessibility tools |
+
+**The Cool Factor:** You're not just using voice control—you're having a conversation with your terminal. Say "computer", dictate your Git commit message, say "send it", and it's done. Hands never leave your coffee cup.
+
+**The Real Reason:** Because typing `git commit -m "fix: resolve issue with async handler in webhook processor"` when you're 8 coffees deep is pain. Just say it.
 
 ---
 
-## ✨ Key Features
+## ✨ What Makes VoxTerm Special
 
-- **Wake Word Detection** - Say "computer" to activate (customizable)
-- **Real-Time Streaming** - Instant transcription with faster-whisper
-- **Voice Commands** - Navigate and edit with voice ("delete word", "send it", etc.)
-- **Claude Mode Toggle** - Switch between plan/edit/default modes with voice
-- **Background Service** - Run as daemon with toggle script
-- **Configurable Models** - From tiny (fast) to large (accurate)
+### 🎙️ Always-Listening Wake Word
+Say "computer" (or jarvis, or alexa, or 10+ other options) and VoxTerm springs to life. No keyboard shortcuts, no mouse clicks, no interruption to your flow.
+
+**vs macOS Voice Control:** Requires manual activation key every single time.
+
+### 🧠 Terminal-Specific Commands
+- "move left 5" → Cursor jumps
+- "delete word" → Previous word gone
+- "send it" → Enter pressed
+- "change mode twice" → Cycle through Claude AI modes
+
+**vs macOS Voice Control:** Designed for UI navigation, not CLI text editing.
+
+### 🔒 Privacy-First Architecture
+- All transcription runs locally via OpenAI Whisper
+- No cloud APIs for speech-to-text
+- Open source—audit the code yourself
+- Picovoice key ONLY used for wake word detection (transparent about this)
+
+**vs macOS Voice Control:** Proprietary black box. You trust Apple, but you can't verify.
+
+### 🤖 Claude AI Integration
+Unique to VoxTerm: Voice-controlled mode cycling for Claude AI prompts. "Change mode" switches between plan/edit/default without touching the keyboard.
+
+**vs macOS Voice Control:** No AI assistant integration.
+
+### 🎨 Deep Customization
+- 13+ wake words (computer, jarvis, alexa, hey google, etc.)
+- 4 model sizes (tiny for speed, large for accuracy)
+- Sensitivity tuning (0.0-1.0)
+- Background daemon mode
+
+**vs macOS Voice Control:** Limited OS-level settings.
+
+### 🛠️ Developer-Friendly
+- MIT licensed
+- Well-documented codebase
+- Extensible architecture
+- Active development
+
+**vs macOS Voice Control:** Closed source, no extension points.
+
+---
+
+## 📊 VoxTerm vs Alternatives
+
+| Feature | VoxTerm | macOS Voice Control | Talon Voice | Dragon |
+|---------|---------|-------------------|-------------|--------|
+| Terminal-optimized | ✅ | ❌ | ✅ | ❌ |
+| Wake word activation | ✅ | ❌ | ✅ | ❌ |
+| Open source | ✅ | ❌ | ❌ | ❌ |
+| Local processing | ✅ | ✅ | ✅ | ❌ |
+| Free | ✅ | ✅ | ❌ ($$$) | ❌ ($$$) |
+| Claude AI integration | ✅ | ❌ | ❌ | ❌ |
+| macOS native | ✅ | ✅ | ✅ | ✅ |
+| Setup difficulty | Medium | Easy | Hard | Easy |
 
 ---
 
@@ -44,24 +108,47 @@ Type with your voice in any terminal application. Say "computer", speak your com
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Get Started in 5 Minutes
 
+**Requirements:** macOS 14+, Python 3.9+, Microphone
+
+**One-command setup:**
 ```bash
-# 1. Clone the repository
-git clone https://github.com/not2technical/audio-for-terminal.git
-cd audio-for-terminal
-
-# 2. Run setup script (installs dependencies)
+# Clone and run setup
+git clone https://github.com/not2technical/voxterm.git
+cd voxterm
 ./setup.sh
-
-# 3. Configure your Picovoice API key (free)
 ./setup-access-key.sh
-
-# 4. Start the background service
 ./toggle.sh
+
+# Say "computer" and start talking! 🎉
 ```
 
-Say **"computer"**, then speak your command!
+**That's it.** Your terminal now understands English.
+
+---
+
+## 👥 Who's This For?
+
+### Perfect For:
+- **Terminal power users** who want hands-free command execution
+- **Developers** who dictate Git commits, docs, and scripts
+- **AI enthusiasts** who use Claude/ChatGPT and want voice integration
+- **Privacy-conscious users** who want local-only processing
+- **Accessibility users** who need more than macOS Voice Control offers
+- **Anyone** who thinks talking to computers is cool
+
+### Not For:
+- People happy with macOS Voice Control
+- Users who rarely use the terminal
+- Those unwilling to set up Python dependencies
+
+### Use Cases:
+- Dictating long Git commit messages
+- Writing documentation while coding
+- Hands-free command execution during demos
+- Accessibility when keyboard is difficult
+- Just being cool at coffee shops 😎
 
 ---
 
@@ -280,7 +367,7 @@ See [CHEATSHEET.md](CHEATSHEET.md) for the complete command reference.
 ## 📂 Project Structure
 
 ```
-audio-for-terminal/
+voxterm/
 ├── main_streaming.py          # Streaming mode entry point
 ├── streaming_recorder.py      # Real-time audio recording
 ├── streaming_transcriber.py   # faster-whisper transcription
@@ -347,7 +434,7 @@ pip install pyaudio
 
 **Solution:**
 ```bash
-cd audio-for-terminal
+cd voxterm
 source venv/bin/activate
 python test_mic.py
 ```
@@ -373,7 +460,7 @@ Speaks a test sound and shows audio levels. Press Ctrl+C to stop.
 ./create-app.sh
 ```
 
-Creates a `VoiceDictation.app` that you can add to your Dock.
+Creates a `VoxTerm.app` that you can add to your Dock.
 
 ---
 
@@ -415,8 +502,8 @@ Free to use for personal and commercial projects.
 
 ## 💬 Support
 
-- **Issues**: [GitHub Issues](https://github.com/not2technical/audio-for-terminal/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/not2technical/audio-for-terminal/discussions)
+- **Issues**: [GitHub Issues](https://github.com/not2technical/voxterm/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/not2technical/voxterm/discussions)
 
 ---
 

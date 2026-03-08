@@ -1,4 +1,4 @@
-# 🚀 Streaming Mode - Real-Time Voice Dictation
+# 🚀 VoxTerm Streaming Mode - Real-Time Voice Control
 
 ## What's New?
 
